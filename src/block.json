@@ -1,0 +1,60 @@
+{
+  "apiVersion": 2,
+  "name": "wp-plugin-starter/example-block",
+  "title": "Example Block",
+  "category": "widgets",
+  "icon": "admin-customizer",
+  "description": "An example block from the WordPress Plugin Starter template",
+  "supports": {
+    "html": false,
+    "align": ["left", "center", "right", "wide"],
+    "color": {
+      "text": true,
+      "background": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontWeight": true,
+      "letterSpacing": true
+    },
+    "spacing": {
+      "margin": ["top", "bottom"],
+      "padding": ["top", "bottom"]
+    }
+  },
+  "attributes": {
+    "text": {
+      "type": "string",
+      "default": "Hello from WordPress Plugin Starter!"
+    },
+    "displayType": {
+      "type": "string",
+      "default": "paragraph"
+    },
+    "headingLevel": {
+      "type": "number",
+      "default": 2
+    },
+    "typography": {
+      "type": "object",
+      "default": {}
+    },
+    "colors": {
+      "type": "object",
+      "default": {}
+    },
+    "spacing": {
+      "type": "object",
+      "default": {}
+    },
+    "alignment": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "wp-plugin-starter",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style.css"
+}

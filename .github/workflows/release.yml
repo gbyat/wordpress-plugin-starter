@@ -1,0 +1,141 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Sync version first
+        run: |
+          echo "Syncing version before building..."
+          npm run version-sync
+          echo "Version sync completed"
+
+      - name: Build plugin
+        run: npm run build
+
+      - name: Prepare release folder
+        run: |
+          mkdir release
+          cp plugin-name.php release/
+          cp package.json release/
+          cp README.md release/
+          cp -r build release/
+          if [ -d languages ]; then cp -r languages release/; fi
+
+      - name: Create ZIP
+        run: |
+          cd release
+          zip -r ../wordpress-plugin-starter.zip .
+
+      - name: Delete existing assets
+        run: |
+          # Get release ID with error handling
+          RELEASE_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref_name }}")
+          
+          echo "Release response: $RELEASE_RESPONSE"
+          
+          RELEASE_ID=$(echo "$RELEASE_RESPONSE" | jq -r '.id // empty')
+          
+          if [ -z "$RELEASE_ID" ]; then
+            echo "Could not get release ID, skipping asset deletion"
+            exit 0
+          fi
+          
+          echo "Release ID: $RELEASE_ID"
+          
+          # Get existing assets with error handling
+          ASSETS_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/$RELEASE_ID/assets")
+          
+          echo "Assets response: $ASSETS_RESPONSE"
+          
+          # Check if response is valid JSON array
+          if echo "$ASSETS_RESPONSE" | jq -e 'type == "array"' > /dev/null 2>&1; then
+            ASSETS=$(echo "$ASSETS_RESPONSE" | jq -r '.[] | select(.name == "wordpress-plugin-starter.zip") | .id // empty')
+            
+            # Delete existing assets
+            for asset_id in $ASSETS; do
+              if [ ! -z "$asset_id" ]; then
+                echo "Deleting asset ID: $asset_id"
+                curl -X DELETE -H "Authorization: token ${{ secrets.PAT_TOKEN }}" \
+                  "https://api.github.com/repos/${{ github.repository }}/releases/assets/$asset_id"
+              fi
+            done
+          else
+            echo "Invalid assets response, skipping deletion"
+          fi
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: wordpress-plugin-starter.zip
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          body: |
+            ## WordPress Plugin Starter Template
+
+            ### Version ${{ github.ref_name }}
+
+            This is a starter template for WordPress plugins with:
+            - ✅ Automatic GitHub Update System
+            - ✅ GitHub Actions CI/CD Pipeline
+            - ✅ Version Management with npm scripts
+            - ✅ Tab-based Admin Interface
+            - ✅ Debug Information and Cache Management
+            - ✅ Webpack Build System
+            - ✅ Block Editor Integration
+
+            ### Installation
+
+            1. Download the ZIP file
+            2. Upload to your WordPress site via Plugins → Add New → Upload Plugin
+            3. Activate the plugin
+            4. Go to Settings → Plugin Starter to configure
+
+            ### Customization
+
+            After installation, customize the plugin for your needs:
+            1. Rename `plugin-name.php` to your plugin name
+            2. Update the plugin header information
+            3. Change the GitHub repository URL
+            4. Add your specific functionality
+            5. Configure GitHub token for updates
+
+            ### Features
+
+            - **GitHub Update System**: Automatic updates from GitHub releases
+            - **CI/CD Pipeline**: Automated building and releasing
+            - **Version Management**: Sync between package.json and PHP
+            - **Admin Interface**: Settings, debug info, and cache management
+            - **Modern Development**: Webpack, ES6, and WordPress standards
+
+            ### Support
+
+            For issues and questions, please visit the [GitHub repository](https://github.com/gbyat/wordpress-plugin-starter).
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }} 

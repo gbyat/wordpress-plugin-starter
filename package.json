@@ -1,0 +1,44 @@
+{
+  "name": "wordpress-plugin-starter",
+  "version": "1.0.0",
+  "description": "A WordPress plugin starter template with GitHub update system and CI/CD pipeline",
+  "main": "index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "build:prod": "wp-scripts build --mode=production",
+    "start": "wp-scripts start",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "lint:php": "composer run-script phpcs",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "version-sync": "node scripts/sync-version.js",
+    "release:patch": "npm version patch && npm run version-sync && git add plugin-name.php package.json && git commit -m \"Bump version to $(node -p 'require(\\'./package.json\\').version')\" && git push origin main --tags",
+    "release:minor": "npm version minor && npm run version-sync && git add plugin-name.php package.json && git commit -m \"Bump version to $(node -p 'require(\\'./package.json\\').version')\" && git push origin main --tags",
+    "release:major": "npm version major && npm run version-sync && git add plugin-name.php package.json && git commit -m \"Bump version to $(node -p 'require(\\'./package.json\\').version')\" && git push origin main --tags"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "starter",
+    "template",
+    "github",
+    "updates",
+    "ci-cd"
+  ],
+  "author": "Your Name",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@wordpress/scripts": "^26.19.0"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gbyat/wordpress-plugin-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gbyat/wordpress-plugin-starter/issues"
+  },
+  "homepage": "https://github.com/gbyat/wordpress-plugin-starter#readme"
+}

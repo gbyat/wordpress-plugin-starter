@@ -1,0 +1,53 @@
+/**
+ * WordPress Plugin Starter - Frontend Styles
+ * 
+ * These styles are applied to the frontend of the website.
+ */
+
+.wps-block {
+    /* Base styles for WordPress Plugin Starter blocks */
+    position: relative;
+    margin: 1em 0;
+}
+
+/* Typography support */
+.wps-block.has-text-color {
+    color: inherit;
+}
+
+.wps-block.has-background {
+    padding: 0.5em 1em;
+}
+
+/* Alignment classes */
+.wps-block.has-text-align-left {
+    text-align: left;
+}
+
+.wps-block.has-text-align-center {
+    text-align: center;
+}
+
+.wps-block.has-text-align-right {
+    text-align: right;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .wps-block {
+        font-size: 0.9em;
+    }
+    
+    .wps-block.has-text-align-left,
+    .wps-block.has-text-align-right {
+        text-align: center;
+    }
+}
+
+/* Print styles */
+@media print {
+    .wps-block {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+} 

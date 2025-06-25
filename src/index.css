@@ -1,0 +1,72 @@
+/**
+ * WordPress Plugin Starter - Editor Styles
+ * 
+ * These styles are applied to the block editor only.
+ */
+
+.wps-block {
+    /* Base styles for the block in editor */
+    position: relative;
+}
+
+.wps-block .wps-block {
+    /* Nested block styles */
+    margin: 0;
+    padding: 0;
+}
+
+/* Editor-specific styling */
+.editor-styles-wrapper .wps-block {
+    /* Ensure proper spacing in editor */
+    margin: 1em 0;
+}
+
+/* Block preview styling */
+.wps-block[data-type="wp-plugin-starter/example-block"] {
+    border: 2px dashed #ddd;
+    padding: 20px;
+    background: #f9f9f9;
+    position: relative;
+}
+
+.wps-block[data-type="wp-plugin-starter/example-block"]::before {
+    content: "WordPress Plugin Starter Block";
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: #fff;
+    padding: 2px 8px;
+    font-size: 12px;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+/* Typography controls preview */
+.wps-block.has-text-color {
+    color: inherit;
+}
+
+.wps-block.has-background {
+    padding: 0.5em 1em;
+}
+
+/* Alignment classes */
+.wps-block.has-text-align-left {
+    text-align: left;
+}
+
+.wps-block.has-text-align-center {
+    text-align: center;
+}
+
+.wps-block.has-text-align-right {
+    text-align: right;
+}
+
+/* Responsive design for editor */
+@media (max-width: 768px) {
+    .wps-block {
+        font-size: 0.9em;
+    }
+} 
