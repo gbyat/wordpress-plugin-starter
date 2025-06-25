@@ -1,6 +1,6 @@
 {
   "name": "wordpress-plugin-starter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A WordPress plugin starter template with GitHub update system and CI/CD pipeline",
   "main": "index.js",
   "scripts": {
