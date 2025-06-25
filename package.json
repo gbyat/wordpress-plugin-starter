@@ -14,9 +14,10 @@
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
     "version-sync": "node scripts/sync-version.js",
-    "release:patch": "npm version patch && npm run version-sync && git add plugin-name.php package.json && git commit -m \"Bump version to $(node -p 'require(\\'./package.json\\').version')\" && git push origin main --tags",
-    "release:minor": "npm version minor && npm run version-sync && git add plugin-name.php package.json && git commit -m \"Bump version to $(node -p 'require(\\'./package.json\\').version')\" && git push origin main --tags",
-    "release:major": "npm version major && npm run version-sync && git add plugin-name.php package.json && git commit -m \"Bump version to $(node -p 'require(\\'./package.json\\').version')\" && git push origin main --tags"
+    "get-version": "node scripts/get-version.js",
+    "release:patch": "npm version patch && npm run version-sync && git add plugin-name.php package.json && git commit -m \"🚀 Release v$(npm run get-version --silent)\" && git push origin main --tags",
+    "release:minor": "npm version minor && npm run version-sync && git add plugin-name.php package.json && git commit -m \"🚀 Release v$(npm run get-version --silent)\" && git push origin main --tags",
+    "release:major": "npm version major && npm run version-sync && git add plugin-name.php package.json && git commit -m \"🚀 Release v$(npm run get-version --silent)\" && git push origin main --tags"
   },
   "keywords": [
     "wordpress",
