@@ -15,7 +15,7 @@
     "plugin-zip": "wp-scripts plugin-zip",
     "version-sync": "node scripts/sync-version.js",
     "get-version": "node scripts/get-version.js",
-    "release:patch": "npm version patch && npm run version-sync && git add plugin-name.php package.json && git commit -m \"🚀 Release v$(npm run get-version --silent)\" && git push origin main --tags",
+    "release:patch": "powershell -ExecutionPolicy Bypass -File scripts/release.ps1",
     "release:minor": "npm version minor && npm run version-sync && git add plugin-name.php package.json && git commit -m \"🚀 Release v$(npm run get-version --silent)\" && git push origin main --tags",
     "release:major": "npm version major && npm run version-sync && git add plugin-name.php package.json && git commit -m \"🚀 Release v$(npm run get-version --silent)\" && git push origin main --tags"
   },
