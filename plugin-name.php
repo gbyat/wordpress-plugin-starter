@@ -4,7 +4,16 @@
  * Plugin Name: WordPress Plugin Starter
  * Plugin URI: https://github.com/gbyat/wordpress-plugin-starter
  * Description: Ein Starter-Template für WordPress-Plugins mit automatischem GitHub-Update-System
- * Version: 1.0.3'ABSPATH')) {
+ * Version: 1.0.3
+ * Author: your name
+ * License: GPL v2 or later
+ * Text Domain: wordpress-plugin-starter
+ * Domain Path: /languages
+ * Update URI: https://github.com/your-github-username/wordpress-plugin-starter/releases/latest/download/wordspress-plugin-starter.zip
+ * */
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
     exit;
 }
 

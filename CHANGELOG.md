@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2025-06-25 08:02:18
+
+### Added
+- Version 1.0.3 release
+
+
 ## [1.0.2] - 2025-06-25 08:00:54
 
 ### Added

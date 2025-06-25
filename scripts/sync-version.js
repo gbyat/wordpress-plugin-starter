@@ -14,7 +14,7 @@ const path = require('path');
 const CONFIG = {
     phpFile: 'plugin-name.php',
     changelogFile: 'CHANGELOG.md',
-    versionPattern: /(Version:\s*)(['"]?)([^'"]+)(['"]?)/,
+    versionPattern: /(\*\s*Version:\s*)([^\s\n\r]+)/,
     constantPattern: /(define\s*\(\s*['"]WPS_VERSION['"]\s*,\s*['"])([^'"]+)(['"]\s*\);)/,
     changelogHeader: '# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n'
 };
@@ -42,7 +42,7 @@ function updatePhpVersion(version) {
 
         // Update plugin header version
         if (CONFIG.versionPattern.test(phpContent)) {
-            phpContent = phpContent.replace(CONFIG.versionPattern, `$1$2${version}$4`);
+            phpContent = phpContent.replace(CONFIG.versionPattern, `$1${version}`);
             updated = true;
             console.log(`✅ Updated plugin header version to ${version}`);
         }
