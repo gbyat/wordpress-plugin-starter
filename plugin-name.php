@@ -4,21 +4,12 @@
  * Plugin Name: WordPress Plugin Starter
  * Plugin URI: https://github.com/gbyat/wordpress-plugin-starter
  * Description: Ein Starter-Template für WordPress-Plugins mit automatischem GitHub-Update-System
- * Version: 1.0.2
- * Author: your name
- * License: GPL v2 or later
- * Text Domain: wordpress-plugin-starter
- * Domain Path: /languages
- * Update URI: https://github.com/your-github-username/wordpress-plugin-starter/releases/latest/download/wordspress-plugin-starter.zip
- * */
-
-// Prevent direct access
-if (!defined('ABSPATH')) {
+ * Version: 1.0.3'ABSPATH')) {
     exit;
 }
 
 // Define plugin constants
-define('WPS_VERSION', '1.0.2');
+define('WPS_VERSION', '1.0.3');
 define('WPS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WPS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('WPS_GITHUB_REPO', 'gbyat/wordpress-plugin-starter'); // Change this to your repo
